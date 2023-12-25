@@ -3,25 +3,39 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Login</title>
+    <style>
+        .button-link {
+            display: inline-block;
+            padding: 5px 5px;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
 <h1>Login</h1>
 <div th:if="${error}">
     Unable to login. Check your username and password.
 </div>
-<p>New here? Click
-    <a th:href="@{/register}">here</a> to register.</p>
 <form method="post" th:action="@{/login}" id="loginForm">
-    <label for="username">Username: </label>
-    <input type="text" name="username" id="username"/> <br/>
-
-    <label for="password">Password: </label>
-    <input type="password" name="password" id="password"/> <br/>
-
-    <input type="submit" value="login">
-</form>
-<form method="post" th:action="@{/logout}">
-    <input type="submit" value="logout"/>
+    <fieldset>
+        <legend>Authorization</legend>
+        <label>
+            Username
+            <input type="text" name="username" pattern="^[A-Za-z0-9+_.-]+@(.+)$" required>
+        </label>
+        <label>
+            Password
+            <input type="password" name="password" minlength="6" required>
+        </label>
+        <br>
+        <input type="submit"/>
+        <a th:href="@{/register}" class="button-link">
+            Registration
+        </a>
+    </fieldset>
 </form>
 </body>
 </html>
